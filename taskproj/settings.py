@@ -3,10 +3,10 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dsalpmdsaubdisuyabvdiuysabdiysavbyidsvbayidsa"
+SECRET_KEY = "SECRET"
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
-_allowed = ['brenoharaujo2503.discloud.app', 'localhost:8000', 'localhost', '127.0.0.1']
+_allowed = []
 ALLOWED_HOSTS = _allowed
 
 INSTALLED_APPS = [
@@ -75,7 +75,7 @@ if not DEBUG:
     X_FRAME_OPTIONS = 'DENY'
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     USE_X_FORWARDED_HOST = True
-    CSRF_TRUSTED_ORIGINS = [h.strip() for h in os.getenv('CSRF_TRUSTED_ORIGINS', 'https://brenoharaujo2503.discloud.app').split(',')]
+    CSRF_TRUSTED_ORIGINS = [h.strip() for h in os.getenv('CSRF_TRUSTED_ORIGINS', 'http://localhost:8000').split(',')]
     CSRF_COOKIE_SECURE = True
 else:
     # In development allow non-secure CSRF cookie
