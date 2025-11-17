@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card form-card">
+  <h2>{{ title }}</h2>
+  <form method="post" class="task-form">
+    {% csrf_token %}
+    <div class="form-row">
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div class="form-row">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+    <div class="form-row two-cols">
+      <div>
+        {{ form.due_date.label_tag }}
+        {{ form.due_date }}
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn primary">Salvar</button>
+      <a class="btn ghost" href="{% url 'tasks:index' %}">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

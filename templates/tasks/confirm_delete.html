@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card confirm-card">
+  <h2>Confirmar exclusão</h2>
+  <p>Deseja realmente excluir a tarefa: <strong>{{ task.title }}</strong>?</p>
+  <form method="post" class="inline-form">
+    {% csrf_token %}
+    <button type="submit" class="btn danger">Excluir</button>
+    <a class="btn ghost" href="{% url 'tasks:index' %}">Cancelar</a>
+  </form>
+</div>
+{% endblock %}

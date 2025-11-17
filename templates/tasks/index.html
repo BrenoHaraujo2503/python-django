@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="page-head">
+  <h1>Minhas tarefas</h1>
+  <p class="muted">Organize suas atividades — crie, edite, conclua e exclua tarefas rapidamente.</p>
+</div>
+
+{% if tasks %}
+  <div class="grid">
+    {% for task in tasks %}
+      <article class="card {% if task.completed %}card-completed{% endif %}">
+        <div class="card-body">
+          <h3 class="task-title">{{ task.title }}</h3>
+          <p class="task-desc">{{ task.description|linebreaksbr }}</p>
+        </div>
+        <div class="card-meta">
+          <div>Vencimento: <strong>{{ task.due_date|default:'—' }}</strong></div>
+          <div>Criado: {{ task.created_at|date:'d/m/Y H:i' }}</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn" href="{% url 'tasks:edit' task.pk %}">Editar</a>
+          <a class="btn ghost" href="{% url 'tasks:toggle' task.pk %}">{% if task.completed %}Reabrir{% else %}Concluir{% endif %}</a>
+          <a class="btn danger" href="{% url 'tasks:delete' task.pk %}">Excluir</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="empty">
+    <p>Nenhuma tarefa encontrada.</p>
+    <a class="btn primary" href="{% url 'tasks:create' %}">Criar primeira tarefa</a>
+  </div>
+{% endif %}
+
+{% endblock %}
